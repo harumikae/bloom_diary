@@ -1,5 +1,5 @@
 <% if current_user && current_user.diary.present? %>
-  <h2>あなたの日記: <%= current_user.diary.diarys_title %></h2>
+  <h2><%= current_user.diary.diarys_title %>の日記</h2>
 <% else %>
   <%= form_with model: Diary.new, url: diaries_path, local: true do |form| %>
     <div>
