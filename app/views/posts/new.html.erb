@@ -1,0 +1,18 @@
+<h2 style="text-align: center;">「<%= @diary.diarys_title %>」の投稿</h2>
+
+<%= form_with model: @post, url: diary_posts_path(@diary), local: true do |form| %>
+  <div>
+    <%= form.label :target, "1. 目標・叶えたいこと" %><br>
+    <%= form.text_field :target %>
+  </div>
+
+  <div>
+    <%= form.label :treat, "2. ご褒美" %><br>
+    <%= form.text_field :treat %>
+  </div>
+
+  <div>
+    <%= form.submit "皆んなと共有", name: "submit_type", value: "皆んなと共有", class: "btn" %>
+    <%= form.submit "自分", name: "submit_type", value: "自分", class: "btn" %>
+  </div>
+<% end %>
