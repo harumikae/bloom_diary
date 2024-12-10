@@ -11,7 +11,7 @@ class DiariesController < ApplicationController
   end
 
   private
-
+  
   def diary_params
     params.require(:diary).permit(:diarys_title)
   end
