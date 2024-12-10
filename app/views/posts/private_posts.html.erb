@@ -1,0 +1,7 @@
+<h2>自分の投稿</h2>
+<% @private_posts.each do |post| %>
+  <div class="post">
+    <p>目標: <%= post.target %></p>
+    <p>ご褒美: <%= post.treat %></p>
+  </div>
+<% end %>
