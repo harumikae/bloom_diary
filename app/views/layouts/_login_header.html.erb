@@ -2,5 +2,8 @@
   <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
 </li>
 <li>
-<%= link_to "投稿を作成する", new_diary_post_path(current_user.diary) %>
-</li>
+  <% if current_user&.diary %>
+    <%= link_to "投稿を作成する", new_diary_post_path(current_user.diary) %>
+  <% else %>
+    <span>投稿を作成する</span>
+<% end %></li>
