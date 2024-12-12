@@ -1,7 +1,4 @@
 <h2>みんなの投稿</h2>
 <% @shared_posts.each do |post| %>
-  <div class="post">
-    <p>目標: <%= post.target %></p>
-    <p>ご褒美: <%= post.treat %></p>
-  </div>
+  <%= render partial: "post", locals: { post: post } %>
 <% end %>
