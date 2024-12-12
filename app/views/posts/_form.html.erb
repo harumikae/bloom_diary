@@ -1,6 +1,6 @@
 <h2 style="text-align: center;">「<%= @diary.diarys_title %>」の投稿</h2>
 
-<%= form_with model: @post, url: diary_posts_path(@diary), local: true do |f| %>
+<%= form_with model: [@diary, @post], local: true do |f| %>
   <div>
     <%= f.label :target, "1. 目標・叶えたいこと" %><br>
     <%= f.text_field :target %>
@@ -12,7 +12,13 @@
   </div>
 
   <div>
+  <% if @post.new_record? %>
+  <!-- 新規作成時のボタン -->
     <%= f.submit "皆んなと共有", name: "submit_type", value: "share", class: "btn" %>
     <%= f.submit "自分", name: "submit_type", value: "private", class: "btn" %>
+  <% else %>
+    <!-- 編集時のボタン -->
+    <%= f.submit "保存", class: "btn btn-primary" %>
+  <% end %>
   </div>
 <% end %>
