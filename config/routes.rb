@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"]
   resources :diaries, only: [:create] do #日記に関連するルールの定義
     resources :posts, only: [:new, :create, :edit, :destroy, :update] do #投稿を新しく作成、既存の日記に紐付けするためのルール設定
+      resources :post_actions, only: [:create]
     end
   end
 

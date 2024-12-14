@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :diary
+  has_many :post_actions, dependent: :destroy
 
   validates :target, :treat, presence: true
   #バリデーションの追記　目標とご褒美は必須
