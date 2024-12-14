@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:shared_posts]#アクション実行前にユーザーがログインしてるか確認
-  before_action :set_diary, only: [:new, :create, :edit_do, :update_do]#特定ユーザーの日記を探し、@diary にセットする準備をしている
-  before_action :set_post, only: [:edit_do, :update_do, :update, :edit, :destroy ]  # 特定の投稿をセット
+  before_action :set_diary, only: [:new, :create]#特定ユーザーの日記を探し、@diary にセットする準備をしている
+  before_action :set_post, only: [:update, :edit, :destroy]  # 特定の投稿をセット
 
   def new
     @post = @diary.posts.build
@@ -35,25 +35,6 @@ class PostsController < ApplicationController
   def private_posts
     @private_posts = current_user.diary.posts.private_post
   end
-
-  # 実行した内容を編集するフォームを表示
-  def edit_do
-    # @post は before_action :set_post で取得済み
-  end
-
-  # 実行した内容を更新
-  def update_do
-    if @post.update(post_params)
-      redirect_to root_path, notice: "実行した内容が更新されました"
-    else
-      render :edit_do, alert: "更新に失敗しました"
-    end
-  end
-
-  # def edit
-  #   @post = current_user.diary.posts.find(params[:id])
-  #   #ログインしているユーザーが投稿した投稿一覧の中から、params[:id]の値と同じIDを持ったpostレコードのみを取得
-  # end
 
   def edit
     @post = Post.find(params[:id])
@@ -106,6 +87,6 @@ def set_post
 end
 
   def post_params
-    params.require(:post).permit(:target, :treat, :do, :visibility)
+    params.require(:post).permit(:target, :treat, :visibility)
   end
 end
