@@ -3,49 +3,38 @@
     const form = document.getElementById(`form_${postId}`);
     const triangleIcon = document.getElementById(`triangle-icon-${postId}`);
 
-    if (form.style.display === "none") {
-      form.style.display = "block";
-      triangleIcon.classList.remove('triangle-down');
-      triangleIcon.classList.add('triangle-up');
-    } else {
-      form.style.display = "none";
-      triangleIcon.classList.remove('triangle-up');
-      triangleIcon.classList.add('triangle-down');
-    }
+    form.style.display = form.style.display === "none" ? "block" : "none";
+    triangleIcon.classList.toggle('triangle-down');
+    triangleIcon.classList.toggle('triangle-up');
   }
 </script>
 
-<div class="post">
-  <p>目標: <%= post.target %></p>
-  <p>ご褒美: <%= post.treat %></p>
+<div class="flex w-full flex-col p-4 sm:max-w-xl mx-auto">
+  <div class="card bg-deep-green rounded-box shadow-md p-4">
+    <p class="text-lg text-light-khaki font-semibold ml-2">
+    目標: <br>
+    <span class="text-light-brown font-normal"><%= post.target %></span>
+    </p>
 
-  <% if post.diary.user == current_user %>
-    <!-- 編集と削除ボタンを表示 -->
-    <%= link_to "編集", edit_diary_post_path(post.diary, post), id: "button-edit-#{post.id}", class: "btn btn-primary" %>
-    <%= link_to "削除", diary_post_path(post.diary, post), id: "button-delete-#{post.id}", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "btn btn-danger" %>
-  <% end %>
+    <p class="text-lg text-light-khaki font-semibold ml-2">
+    ご褒美: <br>
+    <span class="text-light-brown font-normal"><%= post.treat %></span>
+    </p>
 
-<% if post.diary.user == current_user %>
-    <!-- トグルボタン -->
-    <button type="button" onclick="toggleForm('<%= dom_id(post) %>')">実行したこと</button>
+    <% if post.diary.user == current_user %>
+      <!-- 編集と削除ボタン -->
+      <div class="flex space-x-2 mt-2 ml-2">
+        <%= link_to "編集", edit_diary_post_path(post.diary, post), class: "btn text-light-khaki bg-deep-brown hover:bg-black-brown py-3 flex items-center justify-center" %>
+        <%= link_to "削除", diary_post_path(post.diary, post), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, 
+        class: "btn text-light-khaki bg-deep-brown hover:bg-black-brown py-3 flex items-center justify-center" %>
+      </div>
 
-    <!-- 入力フォーム（最初は非表示） -->
-    <div id="<%= dom_id(post, :form) %>" style="display: none;">
-      <%= form_with(model: [post, PostAction.new],url: diary_post_post_actions_path(post.diary_id, post.id), local: true) do |f| %>
-        <div>
-          <%= f.text_area :content, placeholder: "実行したことを入力" %>
-        </div>
-        <div>
-          <%= f.submit "保存" %>
-        </div>
-      <% end %>
-    </div>
+        <%= render 'posts/post_action', post: post %> <!-- 実行機能 -->
 
-    <!-- 実行した内容のリスト -->
-    <ul>
-      <% post.post_actions.each do |action| %>
-        <li><%= action.content %></li>
-      <% end %>
-    </ul>
-  <% end %>
+      <!-- 達成ボタン -->
+      <div class=" ml-2">
+        <%= link_to "達成ボタン", posts_bloom_path, class: "btn text-light-khaki bg-deep-brown hover:bg-apricot-pink btn-sm", method: :get %>
+      </div>
+    <% end %>
+  </div>
 </div>

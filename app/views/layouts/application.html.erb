@@ -6,22 +6,32 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Tailwind CSS の CDN を読み込む -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-  <header>
-  <% if user_signed_in? %>
-    <%= render partial: 'layouts/login_header' %>
-  <% else %>
-    <%= render partial: 'layouts/logout_header' %>
-  <% end %>
+  <body class="bg-cover bg-center min-h-screen" style="background-image: url('/緑背景.png');">
+    <header>
+      <div class="navbar bg-deep-brown shadow-lg">
 
-  <!-- 共有一覧リンクを両方に表示する -->
-    <%= render partial: 'posts/shared_links' %>
-  </header>
+        <!-- アプリのタイトル -->
+        <div class="flex-1">
+          <a href="/" class="btn btn-ghost normal-case text-xl">BLOOM DIARY</a>
+        </div>
 
+        <!-- 右側のメニュー -->
+        <% if user_signed_in? %>
+          <%= render partial: 'layouts/login_header' %>
+        <% else %>
+          <%= render partial: 'layouts/logout_header' %>
+        <% end %>
+    </header>
+    <!-- メインコンテンツ -->
+    <main>
     <%= yield %>
+    </main>
   </body>
 </html>

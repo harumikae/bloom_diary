@@ -1,6 +1,13 @@
-<li>
-  <%= link_to "新規登録", new_user_registration_path %>
-</li>
-<li>
-  <%= link_to "ログイン", new_user_session_path %>
-</li>
+
+  <!-- 右側のメニュー -->
+  <div class="flex-none">
+  <!-- メニューを横並び -->
+    <ul class="menu menu-horizontal px-1 space-x-2">
+      <li>
+        <%= link_to "新規登録", new_user_registration_path, class: "btn bg-black-brown text-light-khaki hover:bg-deep-brown" %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_user_session_path, class: "btn bg-black-brown text-light-khaki hover:bg-deep-brown" %>
+      </li>
+    </ul>
+  </div>

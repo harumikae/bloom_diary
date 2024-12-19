@@ -1,0 +1,30 @@
+<!-- 上の余白 -->
+<div class="mt-40">
+  <h2 class="text-center mt-8 mb-8 text-black-brown"><%= @diary.diarys_title %>の投稿</h2>
+
+  <!-- 目標・叶えたいことの間の余白を追加 -->
+  <div class="mt-8">  <!-- ここで余白を追加 -->
+    <%= form_with model: [@diary, @post], local: true do |f| %>
+      <div class="flex flex-col items-center mb-6">
+        <%= f.label :target, "1. 目標・叶えたいこと", class: "text-black-brown" %><br>
+        <%= f.text_area :target, class: "input input-bordered h-20 w-full max-w-sm bg-light-cream text-black-brown", rows: 2, maxlength: 73 %>
+      </div>
+
+      <div class="flex flex-col items-center mb-6">
+        <%= f.label :treat, "2. ご褒美(例：好き・欲しいもの・行きたい場所等)", class: "text-black-brown" %><br>
+        <%= f.text_area :treat, class: "input input-bordered h-20 w-full max-w-sm bg-light-cream text-black-brown", rows: 2, maxlength: 73 %>
+      </div>
+
+      <div class="flex justify-center space-x-4">
+      <% if @post.new_record? %>
+      <!-- 新規作成時のボタン -->
+        <%= f.submit "皆んなと共有", name: "submit_type", value: "share", class: "btn" %>
+        <%= f.submit "自分", name: "submit_type", value: "private", class: "btn" %>
+      <% else %>
+        <!-- 編集時のボタン -->
+        <%= f.submit "保存", class: "btn bg-black-brown text-light-cream hover:bg-deep-brown" %>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<!-- トグルボタン -->
+<div class="mt-4 ml-2">
+  <button type="button" class="btn text-light-khaki bg-deep-brown hover:bg-apricot-pink py-3 flex items-center justify-center" onclick="toggleForm('<%= dom_id(post) %>')">
+    実行したこと
+  </button>
+</div>
+
+<!-- 入力フォーム（最初は非表示） -->
+<div id="<%= dom_id(post, :form) %>" style="display: none;" class="mt-4 ml-2">
+  <%= form_with(model: [post, PostAction.new], url: diary_post_post_actions_path(post.diary_id, post.id), local: true) do |f| %>
+    <div class="form-control">
+      <%= f.text_area :content, placeholder: "実行したことを入力", class: "textarea textarea-bordered bg-calm-green text-deep-brown" %>
+    </div>
+    <div class="mt-2">
+      <%= f.submit "保存", class: "btn text-light-khaki bg-deep-brown hover:bg-apricot-pink btn-sm" %>
+    </div>
+  <% end %>
+</div>
+
+<!-- 実行した内容のリスト -->
+<div class="mt-4 ml-2">
+  <ul class="list-disc pl-5 text-light-brown">
+    <% post.post_actions.each do |action| %>
+      <li><%= action.content %></li>
+    <% end %>
+  </ul>
+</div>

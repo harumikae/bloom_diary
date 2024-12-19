@@ -1,3 +1,20 @@
-<li>
-  <%= link_to "皆の投稿一覧", shared_posts_path %>
-</li>
+
+
+<div class="menu menu-horizontal bg-base-200 shadow-lg rounded-box p-4 space-x-4">
+  <!-- ログイン・ログアウト時、どちらにもハンバーガーメニューに表示される  -->
+  <li>
+    <%= link_to "皆の投稿一覧", shared_posts_path, class: "btn btn-accent" %>
+  </li>
+  <!-- ここから下はログインしてる場合にハンバーメニューに表示されるリンク -->
+  <li>
+  <%= link_to "自分の投稿一覧", private_posts_path, class: "btn btn-accent" %>
+  </li>
+
+  <li>
+    <% if current_user&.diary %>
+      <%= link_to "投稿を作成する", new_diary_post_path(current_user.diary) %>
+    <% else %>
+      <span>投稿を作成する</span>
+    <% end %>
+  </li>
+</div>

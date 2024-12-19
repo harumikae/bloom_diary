@@ -1,9 +1,9 @@
-<li>
-  <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
-</li>
-<li>
-  <% if current_user&.diary %>
-    <%= link_to "投稿を作成する", new_diary_post_path(current_user.diary) %>
-  <% else %>
-    <span>投稿を作成する</span>
-<% end %></li>
+<!-- 右側のメニュー -->
+<div class="flex-none">
+<!-- メニューを横並び -->
+  <ul class="menu menu-horizontal px-1 space-x-2">
+    <li>
+      <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn bg-black-brown text-light-khaki hover:bg-deep-brown" %>
+    </li>
+  </ul>
+</div>
