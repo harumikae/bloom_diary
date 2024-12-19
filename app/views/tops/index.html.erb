@@ -1,15 +1,102 @@
-<% if current_user && current_user.diary.present? %>
-  <h2><%= current_user.diary.diarys_title %>の日記</h2>
-  <%= link_to "投稿を作成する", new_diary_post_path(current_user.diary), class: "btn btn-primary" %>
-<% else %>
-  <%= form_with model: Diary.new, url: diaries_path, local: true do |form| %>
-    <div>
-      <%= form.label :diarys_title, "ユーザー登録後、" %>
-      <p><%= form.label :diarys_title, "あなただけの日記を作りましょう" %></p>
-      <p><%= form.text_field :diarys_title %></p>
+<div class="hero min-h-screen" style="background-image: url('/日記作成背景.png');">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+      <% if current_user && current_user.diary.present? %>
+        <h2 class="text-3xl font-bold mb-5 text-light-cream"><%= current_user.diary.diarys_title %>の日記</h2>
+        <p class="mb-5 text-cream">投稿を作成して、目標を達成しましょう</p>
+        <%= link_to "投稿を作成する", new_diary_post_path(current_user.diary), class: "btn text-light-cream bg-black-brown hover:bg-deep-brown" %>
+      <% else %>
+        <h1 class="text-5xl font-bold mb-5"></h1>
+
+        <!-- 1つ目のトグル機能 -->
+        <div class="mb-5">
+          <button id="toggle-button-1" class="flex items-center text-light-cream font-bold border-none bg-transparent focus:outline-none">
+            <span id="toggle-icon-1" class="mr-2">▼</span>
+            BLOOM DIARY とは
+          </button>
+          <div id="toggle-content-1" class="hidden mt-3 text-left space-y-4">
+            <p class="text-cream">貴方の『目標・叶えたいこと』の<br>実現、お手伝いさせていただきます。</p>
+            <p class="text-cream">今頑張っていること、<br>これから挑戦してみたいけど悩んでいる。</p>
+            <p class="text-cream">そんな貴方の第一歩の勇気を与えます。</p>
+          </div>
+        </div>
+
+        <!-- 2つ目のトグル機能 -->
+        <div class="mb-5">
+          <button id="toggle-button-2" class="flex items-center text-light-cream font-bold border-none bg-transparent focus:outline-none">
+            <span id="toggle-icon-2" class="mr-2">▼</span>
+            使い方 について
+          </button>
+
+          <div id="toggle-content-2" class="hidden mt-3 text-left space-y-4">
+            <p class="text-cream">
+            <span class="font-bold text-light-cream">step1</span><br>右上から新規登録しましょう（済の方：ログインを）<br><br>
+            <span class="font-bold text-light-cream">step2</span><br>貴方の日記を作ってください<br><br>
+            <span class="font-bold text-light-cream">step3</span><br>目標とご褒美の記録をし、投稿しましょう<br><br>
+            <span class="font-bold text-light-cream">step4</span><br>目標に対して実行したことを実行欄に記録しましょう<br><br>
+            <span class="font-bold text-light-cream">step5</span><br>目標が達成したら達成ボタンを押してみましょう<br>貴方を祝福します</p>
+            <p class="text-cream"><span class="font-bold text-light-cream">投稿:</span>『みんなと共有』『自分のみ』の2タイプです。<br>お好きな方で投稿ください。</p>
+            <p class="text-cream"></p>
+          </div>
+        </div>
+
+        <!-- フォーム -->
+        <p class="mb-5 text-cream">ここからあなただけの日記を作りましょう</p>
+        <%= form_with model: Diary.new, url: diaries_path, local: true, class: "space-y-4" do |form| %>
+          <div class="form-control">
+            <%= form.label :diarys_title, "日記のタイトル", class: "label text-cream" %>
+            <%= form.text_field :diarys_title, class: "input input-bordered w-full max-w-xs bg-light-cream text-black-brown" %>
+          </div>
+          <div>
+            <%= form.submit "作る", class: "btn bg-black-brown text-light-cream hover:bg-deep-brown" %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-    <div>
-      <%= form.submit "作る" %>
-    </div>
-  <% end %>
-<% end %>
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // 1つ目のトグル機能
+    const toggleButton1 = document.getElementById("toggle-button-1");
+    const toggleContent1 = document.getElementById("toggle-content-1");
+    const toggleIcon1 = document.getElementById("toggle-icon-1");
+
+    toggleButton1.addEventListener("click", function () {
+      // トグルの説明の表示/非表示を切り替え
+      toggleContent1.classList.toggle("hidden");
+
+      // アイコンの変更
+      if (toggleContent1.classList.contains("hidden")) {
+        toggleIcon1.textContent = "▼"; // 閉じた状態
+      } else {
+        toggleIcon1.textContent = "▲"; // 開いた状態
+      }
+    });
+
+    // 2つ目のトグル機能
+    const toggleButton2 = document.getElementById("toggle-button-2");
+    const toggleContent2 = document.getElementById("toggle-content-2");
+    const toggleIcon2 = document.getElementById("toggle-icon-2");
+
+    toggleButton2.addEventListener("click", function () {
+      // トグルの説明の表示/非表示を切り替え
+      toggleContent2.classList.toggle("hidden");
+
+      // アイコンの変更
+      if (toggleContent2.classList.contains("hidden")) {
+        toggleIcon2.textContent = "▼"; // 閉じた状態
+      } else {
+        toggleIcon2.textContent = "▲"; // 開いた状態
+      }
+    });
+  });
+</script>
+
+<!-- Tailwind CSS の 'hidden' クラスを使用 -->
+<style>
+  /* 必要に応じてカスタマイズ可能 */
+</style>

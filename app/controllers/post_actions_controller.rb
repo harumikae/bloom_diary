@@ -9,8 +9,6 @@ class PostActionsController < ApplicationController
       else
         redirect_to shared_posts_path, notice: "実行したことを追加しました！"
       end
-    else
-      render :new
     end
   end
   

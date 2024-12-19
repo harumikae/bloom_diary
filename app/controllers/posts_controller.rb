@@ -72,6 +72,11 @@ end
     end
   end
 
+  def bloom
+    render partial: 'posts/bloom'
+  end
+  
+
 private
 
 def set_diary

@@ -1,26 +1,50 @@
-<h2>Log in</h2>
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <!-- サインイン画像 -->
+      <img src="/ザミオログイン.png" alt="Login Image" class="w-full max-w-xs mx-auto mb-4 lg:mb-0">
 
-  <%= form_with model: @user, url: user_session_path do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <p class="py-6 text-light-khaki">
+        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+        quasi. In deleniti eaque aut repudiandae et a id nisi.
+      </p>
     </div>
-  <% end %>
+    <div class="w-full max-w-sm shrink-0 p-6">
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+      <%= form_with model: @user, url: user_session_path do |f| %>
+        <!-- エラーメッセージの表示 -->
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <h1 class="text-5xl text-light-khaki font-bold mb-4">Log in</h1>
+        <!-- 名前 -->
+        <div class="form-control mb-4">
+          <%= f.label :name, class: "label-text text-light-khaki" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input input-bordered bg-light-cream text-deep-brown" %>
+        </div>
+
+        <!-- パスワード -->
+        <div class="form-control mb-4">
+          <%= f.label :password, class: "label-text text-light-khaki" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered bg-light-cream text-deep-brown" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-control mb-4 flex items-center">
+            <%= f.check_box :remember_me, class: "checkbox hover:bg-deep-brown" %>
+            <%= f.label :remember_me, class: "label-text ml-2 text-light-khaki" %>
+          </div>
+        <% end %>
+
+        <!-- サインインボタン -->
+        <div class="form-control mt-6">
+          <%= f.submit "Log in", class: "btn w-full text-light-khaki hover:bg-deep-brown" %>
+        </div>
+      <% end %>
+
+      <!-- ログインページへのリンク -->
+      <div class="text-center mt-4 text-light-khaki">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

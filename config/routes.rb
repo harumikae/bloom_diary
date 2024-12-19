@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   # 投稿一覧を「みんなの投稿」と「自分の投稿」に分けるルートを追加
   get "shared_posts", to: "posts#shared_posts", as: "shared_posts" # みんなの投稿
   get "private_posts", to: "posts#private_posts", as: "private_posts" # 自分の投稿
+
+  get 'posts/bloom', to: 'posts#bloom', as: 'posts_bloom' # 花が咲く機能
 end
