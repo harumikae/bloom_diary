@@ -1,4 +1,4 @@
-
+<div class="hero min-h-screen" style="background-image: url('/日記作成背景.png');">
   <div class="hero-overlay bg-opacity-60"></div>
   <div class="hero-content text-neutral-content text-center">
     <div class="max-w-md">
@@ -55,10 +55,11 @@
       <% end %>
     </div>
   </div>
+</div>
 
 <!-- JavaScript -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("turbo:render", function () {
     // 1つ目のトグル機能
     const toggleButton1 = document.getElementById("toggle-button-1");
     const toggleContent1 = document.getElementById("toggle-content-1");

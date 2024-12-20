@@ -86,11 +86,13 @@ def set_diary
   end
 end
 
-def set_post
-  @post = Post.find(params[:id])
-  @diary = @post.diary # 投稿から日記を取得する
-end
-
+  def set_post
+    @post = Post.find_by(id: params[:id], diary_id: params[:diary_id])
+    if @post.nil?
+      redirect_to root_path, alert: "指定された投稿は存在しません"
+    end
+  end
+  
   def post_params
     params.require(:post).permit(:target, :treat, :visibility)
   end
